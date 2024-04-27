@@ -57,7 +57,7 @@ export default function Nav() {
             <NavbarItem className="hidden lg:flex">
               <Link onPress={() => {
                 // setLoginClicked(true)
-                console.log(props)
+                // console.log(props)
               }} color="foreground" href="#">Login</Link>
             </NavbarItem>
             <NavbarItem>

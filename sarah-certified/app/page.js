@@ -21,16 +21,16 @@ export const metadata = {
 export default function Home() {
   // const [loginClicked, setLoginClicked] = React.useState(false);
 
-  const loginModal = () => {
-    alert('Login Modal')
-    // return (
+  // const loginModal = () => {
+  //   alert('Login Modal')
+  //   // return (
 
-    // )
-  }
+  //   // )
+  // }
 
-  if (loginClicked) {
-    loginModal()
-  }   
+  // if (loginClicked) {
+  //   loginModal()
+  // }   
   return (
     <NextUIProvider>
       <main className=" min-h-screen dark text-foreground bg-background">
