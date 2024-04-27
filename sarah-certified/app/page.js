@@ -19,7 +19,7 @@ export const metadata = {
 }
 
 export default function Home() {
-  const [loginClicked, setLoginClicked] = React.useState(false);
+  // const [loginClicked, setLoginClicked] = React.useState(false);
 
   const loginModal = () => {
     alert('Login Modal')
