@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <NextUIProvider>
       <main className=" min-h-screen dark text-foreground bg-background">
-        <Nav setLoginClicked={setLoginClicked} />
+        <Nav  />
         <div className="flex flex-col items-center justify-center h-screen">
           <h1 className="text-3xl">Savor the Outing, Forget the Worry</h1>
           <h2 className="text-xl">Join the Sarah Certified Community and Dine with Confidence</h2>
