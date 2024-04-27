@@ -1,5 +1,11 @@
 import Nav from '../Nav'
 
+
+export const metadata = {
+    title: 'Our Story',
+    description: 'We are a group of individuals who are passionate about helping others achieve their goals.',
+  }
+
 export default function OurStory() {
 
     return (

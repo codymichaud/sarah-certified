@@ -1,3 +1,4 @@
+'use client';
 import {
     Navbar,
     NavbarBrand,
@@ -6,11 +7,13 @@ import {
     Button,
     Link,
 } from "@nextui-org/react";
+import React, { useState } from "react";
 import scspLogo from '../public/scsp-logo.png';
 import Image from 'next/image'
+import PropTypes from 'prop-types';
 
 export default function Nav() {
-
+  
     return (
         <Navbar
           maxWidth="full"
@@ -35,24 +38,27 @@ export default function Nav() {
               </Link>
             </NavbarItem>
             <NavbarItem>
-              <Link color="foreground" href="#">
+              <Link color="foreground" href="/certification">
                 Certification
               </Link>
             </NavbarItem>
             <NavbarItem>
-              <Link color="foreground" href="#">
+              <Link color="foreground" href="/community">
                 Community
               </Link>
             </NavbarItem>
             <NavbarItem>
-              <Link color="foreground" href="#">
+              <Link color="foreground" href="/contact-us">
                 Contact Us
               </Link>
             </NavbarItem>
           </NavbarContent>
           <NavbarContent justify="end">
             <NavbarItem className="hidden lg:flex">
-              <Link color="foreground" href="#">Login</Link>
+              <Link onPress={() => {
+                // setLoginClicked(true)
+                console.log(props)
+              }} color="foreground" href="#">Login</Link>
             </NavbarItem>
             <NavbarItem>
               <Button className="bg-secondary-blue" href="#" radius="full">
@@ -63,3 +69,7 @@ export default function Nav() {
         </Navbar>
     )
 }
+
+Nav.propTypes = {
+  setLoginClicked: PropTypes.func,
+};
