@@ -1,5 +1,4 @@
 import React from "react";
-import { NextUIProvider } from "@nextui-org/react";
 import {
   Navbar,
   NavbarBrand,
@@ -10,6 +9,7 @@ import {
 } from "@nextui-org/react";
 import Nav from './Nav'
 import scspLogo from '../public/scsp-logo.png';
+import { NextUIProvider } from "@nextui-org/react";
 
 
  

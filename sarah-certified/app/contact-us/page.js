@@ -1,4 +1,3 @@
-import Nav from '../Nav'
 import {
     Card,
     CardBody,
@@ -15,18 +14,19 @@ export const metadata = {
 export default function ContactUs() {
 
     return (
-        <main className=' min-h-screen dark text-foreground bg-background'>
-            <Nav />
-            <div className='flex flex-col items-center justify-center h-screen'>
-                <div className='flex flex-col items-center justify-start'>
-                    <h1 className="text-3xl">We&apos;re Here for You</h1>
-                    <h2 className="text-xl">Connect With Sarah Certified - Where Compassion Meets Action</h2>
+        <main className=''>
+            <div className='h-screen flex flex-row justify-evenly grid-cols-2 columns-xl'>
+                <div className='flex flex-col items-start justify-start mt-32'>
+                    <div className='mr-32'>
+                        <h1 className="text-3xl mb-5">We&apos;re Here for You</h1>
+                        <h4 className="text-xl">Connect With Sarah Certified - Where Compassion Meets Action</h4>
+                    </div>
                 </div>
-                <Card className='mt-16 w-96'>
-                    <CardBody>
-                        <h3 className='text-center'>Get in Touch!</h3>
+                <div className='flex flex-col items-center justify-center'>
+                    <div className='flex flex-col items-center justify-center w-96'>
                         <Input
                             placeholder=""
+                            type='text'
                             label="Name"
                             width="100%"
                             className='mt-6'
@@ -34,14 +34,22 @@ export default function ContactUs() {
                         <Input
                             placeholder=""
                             label="Email"
+                            type='email'
                             width="100%"
                             className='mt-8'
                         />
-                        <Button className='mt-12 bg-secondary-blue'>
+                        <Input
+                            placeholder=""
+                            type='tel'
+                            label="Phone"
+                            width="100%"
+                            className='mt-8'
+                        />
+                        <Button className='mt-12 bg-secondary-blue text-background'>
                             Submit
                         </Button>
-                    </CardBody>
-                </Card>
+                    </div>
+                </div>
             </div>
         </main>
     )
