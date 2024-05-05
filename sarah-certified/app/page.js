@@ -8,8 +8,6 @@ import {
   Link,
 } from "@nextui-org/react";
 import Nav from './Nav'
-import scspLogo from '../public/scsp-logo.png';
-import { NextUIProvider } from "@nextui-org/react";
 
 
  
@@ -32,7 +30,6 @@ export default function Home() {
   //   loginModal()
   // }   
   return (
-    <NextUIProvider>
       <main className=" min-h-screen dark text-foreground bg-background">
         <Nav  />
         <div className="flex flex-col items-center justify-center h-screen">
@@ -41,6 +38,5 @@ export default function Home() {
         </div>
 
       </main>
-    </NextUIProvider>
   );
 }
