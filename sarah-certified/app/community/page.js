@@ -1,9 +1,6 @@
 
 
-export const metadata = {
-    title: 'community',
-    description: 'Our community is dedicated to helping individuals achieve their goals',
-  }
+
 
 export default function Community() {
 

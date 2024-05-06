@@ -1,9 +1,6 @@
 
 
-export const metadata = {
-    title: 'Certification',
-    description: 'We work to certify restaurants that follow food allergy safety practices',
-  }
+
 
 export default function Certification() {
 
