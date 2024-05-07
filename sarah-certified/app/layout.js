@@ -25,6 +25,7 @@ import Image from 'next/image'
 import { useRouter } from "next/navigation";
 import { Analytics } from "@vercel/analytics/react"
 import { NextUIProvider } from "@nextui-org/react";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { signIn } from "./auth";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -73,6 +74,7 @@ export default function RootLayout({ children }) {
           </head>
           <body className={`${inter.className} min-h-screen dark text-foreground bg-background`}>
               <Analytics />
+              <SpeedInsights />
               <NextUIProvider>
               <Navbar
                   maxWidth="full"

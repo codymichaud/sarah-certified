@@ -91,6 +91,7 @@ export default function ContactUs() {
                         height={500}
                         className='mt-12 ml-16'
                     />
+                    {'sister images with signatures'}
                 </div>
                 <div className='flex items-center content-start'>
                     <Divider orientation='vertical' className='h-96'/>
