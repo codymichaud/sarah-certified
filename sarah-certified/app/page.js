@@ -1,26 +1,21 @@
+'use client'
+
 import React from "react";
 import {
   Spacer,
+  Divider,
+  Button,
 } from "@nextui-org/react";
 import Image from 'next/image'
 import scspDark from '../public/scsp-dark.png';
+import { useRouter } from "next/navigation";
 
 
  
 
 export default function Home() {
-  // const [loginClicked, setLoginClicked] = React.useState(false);
-
-  // const loginModal = () => {
-  //   alert('Login Modal')
-  //   // return (
-
-  //   // )
-  // }
-
-  // if (loginClicked) {
-  //   loginModal()
-  // }   
+  
+  const router = useRouter();
   return (
       <main className="w-h-screen text-foreground">
           <div className="flex flex-col items-center justify-center mt-32 mb-16">
@@ -54,7 +49,55 @@ export default function Home() {
               className='ml-16'
             />
             </div>
-
+          </div>
+          <Spacer y={7} />
+          <Spacer y={7} />
+          <Spacer y={7} />
+          <Spacer y={7} />
+          <div className="flex flex-col justify-center items-center">
+            <h1 className="text-3xl text-secondary-blue underline underline-offset-8 text-center">Our Solution</h1>
+            <div className="flex flex-row items-start justify-center space-x-56 mt-12">
+              <div className="flex flex-col items-center justify-center w-1/3 mt-10">
+                <h2 className="text-secondary-blue underline underline-offset-8 text-2xl">Comprehensive Certification</h2>
+                <ul className="list-disc">
+                  <li>Partnering with Restaraunts to implement a meticulous certification process</li>
+                  <li>Training and systems to ensure effective communication amongst staff to maintain the highest standards of allergy safety</li>
+                  <li>Emergency Contact Information</li>
+                </ul>
+              </div>
+              <Divider orientation='vertical' className='h-72 mb-16'/>
+              <div className="flex flex-col items-center justify-center w-1/3 mt-10">
+                <h2 className="text-secondary-blue underline underline-offset-8 text-2xl">Personalized QR Profiles</h2>
+                <ul className="list-disc">
+                  <li>Ability to dine discretely with our innovative QR profile system</li>
+                  <li>Ability for restaraunts to have immediate access to allergy information</li>
+                  <li>Ability to customize your personal profile to ensure accurate service without the uncomfortable allergy discussions</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <Spacer y={7} />
+          <Spacer y={7} />
+          <Spacer y={7} />
+          <Spacer y={7} />
+          <div>
+            <div className="flex flex-col justify-center items-center">
+              <h1 className="text-3xl text-secondary-blue underline underline-offset-8 text-center">Join us</h1>
+            </div>
+            <div className="text-3xl flex flex-col items-start justify-start ml-32">
+              <h2>Ready to dine without fear?</h2>
+            </div>
+            <div>
+              <h2>Sign Up now for your personalized allergy profile and become part of a community that&apos;s reshaping the dining landscape</h2>
+            </div>
+            <div>
+              <h2>Stay updated with our list of certified restaurants and savor every meal, knowing your safety is our top priority</h2>
+            </div>
+            <div className="flex flex-col justify-center items-center">
+              <Button className="bg-secondary-blue" onPress={() => { router.push('/join-us') }}>
+                Sign Up
+              </Button>
+            </div>
           </div>
 
       </main>

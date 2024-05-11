@@ -26,7 +26,7 @@ import { useRouter } from "next/navigation";
 import { Analytics } from "@vercel/analytics/react"
 import { NextUIProvider } from "@nextui-org/react";
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import { signIn } from "./auth";
+import { signIn } from 'next-auth/react';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,32 +36,7 @@ export default function RootLayout({ children }) {
 
   const router = useRouter();
 
-  // const openModal = () => {
-  //   console.log('open modal')
-
-  //   return (
-  //     <Modal>
-  //       <ModalHeader>Login</ModalHeader>
-  //       <ModalContent>
-
-  //       </ModalContent>
-  //       <ModalFooter>
-  //         <Button>
-  //           Sign Up
-  //         </Button>
-  //         <Button>
-  //           Cancel
-  //         </Button>
-  //         <Button>
-  //           Login
-  //         </Button>
-  //       </ModalFooter>
-  //     </Modal>
-  //   )
-  // }
-
   return (
-
     <html className='dark' lang="en">
           <head>
             <title>Sarah Certified</title>
@@ -118,7 +93,8 @@ export default function RootLayout({ children }) {
                   <NavbarContent justify="end">
                     <NavbarItem className="hidden lg:flex">
                       <Link className="hover:text-secondary-blue" onPress={async () => {
-                        
+                        signIn('google');
+                        setLoginClicked(true);
                       }} color="foreground" href="#">Login</Link>
                     </NavbarItem>
                     <NavbarItem>
