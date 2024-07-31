@@ -16,7 +16,8 @@ import "./globals.css";import {
   Modal,
   ModalHeader,
   ModalContent,
-  ModalFooter
+  ModalFooter,
+  useDisclosure,
 } from "@nextui-org/react";
 import React, { useState } from "react";
 import scspLogo from '../public/scsp-logo.png';
@@ -24,42 +25,21 @@ import Image from 'next/image'
 import { useRouter } from "next/navigation";
 import { Analytics } from "@vercel/analytics/react"
 import { NextUIProvider } from "@nextui-org/react";
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import { signIn } from 'next-auth/react';
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
   const [loginClicked, setLoginClicked] = useState(false);
+  const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
   const router = useRouter();
 
-  const openModal = () => {
-    console.log('open modal')
-
-    return (
-      <Modal>
-        <ModalHeader>Login</ModalHeader>
-        <ModalContent>
-
-        </ModalContent>
-        <ModalFooter>
-          <Button>
-            Sign Up
-          </Button>
-          <Button>
-            Cancel
-          </Button>
-          <Button>
-            Login
-          </Button>
-        </ModalFooter>
-      </Modal>
-    )
-  }
-
   return (
-
-    <html lang="en">
+    <html className='dark' lang="en">
           <head>
+            <title>Sarah Certified</title>
             <link
               rel="icon"
               href='/scsp-logo.png'
@@ -69,6 +49,7 @@ export default function RootLayout({ children }) {
           </head>
           <body className={`${inter.className} min-h-screen dark text-foreground bg-background`}>
               <Analytics />
+              <SpeedInsights />
               <NextUIProvider>
               <Navbar
                   maxWidth="full"
@@ -111,9 +92,9 @@ export default function RootLayout({ children }) {
                   {!loginClicked ? (
                   <NavbarContent justify="end">
                     <NavbarItem className="hidden lg:flex">
-                      <Link className="hover:text-secondary-blue" onPress={() => {
-                        setLoginClicked(true)
-                        console.log('login clicked')
+                      <Link className="hover:text-secondary-blue" onPress={async () => {
+                        signIn('google');
+                        setLoginClicked(true);
                       }} color="foreground" href="#">Login</Link>
                     </NavbarItem>
                     <NavbarItem>
@@ -144,12 +125,10 @@ export default function RootLayout({ children }) {
                           <p className="font-semibold">Signed in as</p>
                           <p className="font-semibold">zoey@example.com</p>
                         </DropdownItem>
+                        <DropdownItem key="team_settings">My Profile</DropdownItem>
+                        <DropdownItem key="analytics">Restaraunts</DropdownItem>
+                        <DropdownItem key="system">Allergies</DropdownItem>
                         <DropdownItem key="settings">My Settings</DropdownItem>
-                        <DropdownItem key="team_settings">Team Settings</DropdownItem>
-                        <DropdownItem key="analytics">Analytics</DropdownItem>
-                        <DropdownItem key="system">System</DropdownItem>
-                        <DropdownItem key="configurations">Configurations</DropdownItem>
-                        <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
                         <DropdownItem onPress={() => {
                           setLoginClicked(false)
                         }} key="logout" color="danger">
@@ -160,6 +139,36 @@ export default function RootLayout({ children }) {
                   </NavbarContent>
                   )}
                 </Navbar>
+                {loginClicked && (
+                  <Modal 
+                    isOpen={isOpen} 
+                    onOpenChange={onOpenChange}
+                    backdrop='opaque'
+                    classNames={{
+                      backdrop: 'bg-gradient-to-t from-secondary-blue/20 to-background backdrop-opacity-5'
+                    }}
+                  >
+                    <ModalHeader className='flex flex-col gap-1'>
+                      Login
+                    </ModalHeader>
+                    <ModalContent>
+                      Login Here
+                    <ModalFooter>
+                      <Button>
+                        Sign Up
+                      </Button>
+                      <Button onPress={() => {
+                        onClose()
+                      }}>
+                        Cancel
+                      </Button>
+                      <Button>
+                        Login
+                      </Button>
+                    </ModalFooter>
+                    </ModalContent>
+                  </Modal>
+                )}
                 {children}
             </NextUIProvider>
           </body>
