@@ -5,28 +5,18 @@ export default function useGetWindow() {
     // Initialize state with undefined width/height so server and client renders match
     // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
     const [windowInfo, setWindowInfo] = React.useState({
-        windowSize: {
-            width: 0,
-            height: 0,
-        },
+        isMobile: false,
     });
   
     React.useEffect(() => {
         if (typeof window !== 'undefined') {
-                console.log('window', window)
             // only execute all the code below in client side
             // Handler to call on window resize
             function handleGetSize() {
-                console.log('resizing!!11', window)
                 // Set window width/height to state
-                if (windowInfo.windowSize.width === 0 && windowInfo.windowSize.height === 0) {
                     setWindowInfo({
-                        windowSize: {
-                            width: window.innerWidth,
-                            height: window.innerHeight,
-                        },
+                        isMobile: window.innerWidth < 767,
                     });
-                }
             }
             
             // Add event listener

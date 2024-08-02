@@ -36,6 +36,10 @@ export default function RootLayout({ children }) {
 
   const router = useRouter();
 
+  React.useEffect(() => {
+    console.log('router', router)
+  }, [])
+
   return (
     <html className='dark' lang="en">
           <head>
@@ -99,7 +103,7 @@ export default function RootLayout({ children }) {
                     </NavbarItem>
                     <NavbarItem>
                       <Button className="bg-secondary-blue text-background" onPress={() => {
-                        router.push('/join-us')
+                        router.push('/sign-up')
                       }} radius="full">
                         Join Our Community
                       </Button>
