@@ -1,36 +1,46 @@
-// import { PrismaClient } from '@prisma/client/edge';
-// import { withAccelerate } from '@prisma/extension-accelerate';
-// import { NextResponse } from 'next/server';
+'use server';
 
-// const prisma = new PrismaClient().$extends(withAccelerate());
+import { NextResponse } from 'next/server';
+import { MongoClient } from 'mongodb';
 
-// export async function POST(request) {
-//     console.log('request', request);
-//     // if (request.method === "POST") {
-//         console.log('request', request, res);
-//         const { userNameFirst, userNameLast, email, phoneNum, zip, id } = request.body;
+const client = new MongoClient(process.env.DIRECT_DATABASE_URL);
 
-//         try {
-//             const newUser = await prisma.User.create({
-//                 data: {
-//                     name: `${userNameFirst} ${userNameLast}`,
-//                     email: email,
-//                     phone: phoneNum,
-//                     zipCode: zip,
-//                     id: id,
-//                 },
-//             });
-//             return NextResponse.json({ user: newUser }, { status: 201 });
-//         } catch (err) {
-//             console.error(err);
-//             return NextResponse.json({ error: 'Failed to create user', details: err.message }, { status: 500 });
-//         } finally {
-//             console.log('disconnecting')
-//             await prisma.$disconnect();
-//         }
-//     // } else {
-//     //     console.log('request', request, res);
-//     //     console.error('Method not allowed', request, res);
-//     //     res.status(405).json({ error: 'Method not allowed', request: request, res: res });
-//     // }
-// }
+export async function POST(request) {
+    console.log('request', request);
+
+    const { email, name, id } = await request.json();
+
+    try {
+        console.log('connecting')
+        await client.connect();
+        const session = client.startSession();
+
+        const transactionResults = await session.withTransaction(async () => {
+            const db = client.db();
+            const usersCollection = db.collection('User');
+
+            // Create a new user within the transaction
+            const newUser = await usersCollection.insertOne({
+                email: email,
+                name: name,
+                id: id,
+            }, { session });
+
+            return newUser;
+        });
+
+        if (transactionResults) {
+            console.log('Transaction successful:', transactionResults, transactionResults.ops);
+            return NextResponse.json({ userID: transactionResults.insertedId, userName: name, email: email }, { status: 201 });
+        } else {
+            console.log('Transaction failed');
+            return NextResponse.json({ error: 'Transaction failed' }, { status: 500 });
+        }
+    } catch (err) {
+        console.error(err);
+        return NextResponse.json({ error: 'Failed to create user', details: err.message }, { status: 500 });
+    } finally {
+        await client.close();
+        await prisma.$disconnect();
+    }
+}

@@ -34,11 +34,12 @@ export default function RootLayout({ children }) {
   const [loginClicked, setLoginClicked] = useState(false);
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
+
   const router = useRouter();
 
-  React.useEffect(() => {
-    console.log('router', router)
-  }, [])
+  // React.useEffect(() => {
+  //   console.log('router', router)
+  // }, [])
 
   return (
     <html className='dark' lang="en">
@@ -180,3 +181,4 @@ export default function RootLayout({ children }) {
 
   );
 }
+

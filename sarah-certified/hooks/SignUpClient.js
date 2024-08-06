@@ -11,6 +11,7 @@ import Image from 'next/image'
 import { PrismaClient } from '@prisma/client';
 import googleImg from '../public/google.png';
 import { useRouter } from "next/navigation";
+import {POST} from '../app/api/signup/route'
 
 
 export default function SignUpClient() {
@@ -25,6 +26,7 @@ export default function SignUpClient() {
     const [isLoading, setIsLoading] = React.useState(false);
     const [zip, setZip] = React.useState('');
     const [isMobile, setIsMobile] = React.useState(false);
+    const [userInfo, setUserInfo] = React.useState(null);
 
     // React.useEffect(() => {
     //     if (windowInfo && usableWindowInfo === null) {
@@ -44,58 +46,57 @@ export default function SignUpClient() {
     const handleSignUp = async () => {
         setIsLoading(true);
         console.log('submitting', userNameFirst, userNameLast, email, phoneNum);
+        // POST(email)
 
         router.push('/profile');
-        setIsLoading(false);
-        setEmail('');
-        setUserNameFirst('');
-        setUserNameLast('');
-        setPhoneNum('');
-        setZip('');
-
+        
         // await prisma.user.create({
         //     data: {
-        //       name: `${userNameFirst} ${userNameLast}`,
+        //     //   name: `${userNameFirst} ${userNameLast}`,
         //       email: email,
-        //       phone: phoneNum,
-        //       posts: [],
+        //     //   phone: phoneNum,
+        //     //   posts: [],
         //       id: 0,
         //     },
         //   }).then(res => {
         //     console.log('user created?', res);
         //   })
 
-        // try {
-        //     console.log('trying to create user');
-        //     const response = await fetch('/api/signup', {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //         },
-        //         body: JSON.stringify({
-        //             userNameFirst,
-        //             userNameLast,
-        //             email,
-        //             phoneNum,
-        //             id: 0,
-        //             zip,
-        //         }),
-        //     })
-        //     if (!response.ok) {
-        //         console.log('response not ok', response);
-        //         setIsLoading(false);
-        //         throw new Error('Failed to create user');
-        //     }
-        //     const result = await response.json();
-        //     console.log('user created:', result.user);
-        // } catch (err) {
-        //     console.log('error creating user:', err);
-        //     console.error(err);
-        // } finally {
-        //     console.log('finally');
-        //     setIsLoading(false);
-        // }
-        
+
+        try {
+            console.log('trying to create user');
+            const response = await fetch('/api/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    name: `${userNameFirst} ${userNameLast}`,
+                    id: '983241',
+                }),
+            })
+            if (!response.ok) {
+                console.log('response not ok', response);
+                setIsLoading(false);
+                throw new Error('Failed to create user');
+            }
+            const result = await response.json();
+            console.log('user created:', result);
+            setUserInfo(result);
+        } catch (err) {
+            console.log('error creating user:', err);
+            console.error(err);
+        } finally {
+            console.log('finally');
+            setIsLoading(false);
+        }
+        // setEmail('');
+        // setUserNameFirst('');
+        // setUserNameLast('');
+        // setPhoneNum('');
+        // setZip('');
+
     }
 
     if (isMobile) {
