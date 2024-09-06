@@ -94,11 +94,11 @@ export default function RootLayout({ children }) {
                       </Link>
                     </NavbarItem>
                   </NavbarContent>
-                  {!loginClicked ? (
+                  {!loginClicked  ? (
                   <NavbarContent justify="end">
                     <NavbarItem className="hidden lg:flex">
                       <Link className="hover:text-secondary-blue" onPress={async () => {
-                        signIn('google');
+                        // signIn('google');
                         setLoginClicked(true);
                       }} color="foreground" href="#">Login</Link>
                     </NavbarItem>

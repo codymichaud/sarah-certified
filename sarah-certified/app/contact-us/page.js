@@ -47,15 +47,27 @@ export default function ContactUs() {
         let phone = num.replace(/^(\d{3})(\d{3})(\d{4})/, '$1-$2-$3')
         setPhone(phone);
         // const phoneNumRegex = /^\d{3}-\d{3}-\d{4}$/;
-        const regex = /^\d{3}-\d{3}-\d{4}$/;
+        // const regex = /^\d{3}-\d{3}-\d{4}$/;
         
-        setIsInvalid(!regex.test(phone));
-        return regex.test(phone);
+        // // setIsInvalid(!regex.test(phone));
+        // return regex.test(phone);
         
     }
 
+    const isPhoneInvalid = () => {
+        const phoneNumRegex = /^\d{3}-\d{3}-\d{4}$/;
+        return phoneNumRegex.test(phone);
+    }
+
     const handleEmail = (email) => {
+
         setEmail(email);
+    }
+
+    const isEmailInvalid = () => {
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        return emailRegex.test(email);
     }
 
     return (
@@ -115,6 +127,7 @@ export default function ContactUs() {
                             type='email'
                             width="100%"
                             value={email}
+                            errorMessage={isEmailInvalid() && "Please enter a valid email"}
                             onValueChange={handleEmail}
                             className='mt-8'
                         />
@@ -127,7 +140,7 @@ export default function ContactUs() {
                             className='mt-8'
                             value={phone}
                             color={!phone ? '' : isInvalid ? "danger" : "success"}
-                            errorMessage={isInvalid && "Please enter a valid phone number"}
+                            errorMessage={isPhoneInvalid() && "Please enter a valid phone number"}
                             isInvalid={isInvalid}
                             onValueChange={handlePhoneNumber}
                         />
